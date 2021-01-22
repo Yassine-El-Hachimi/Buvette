@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Buvette" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-2I34250\SQLEXPRESS;Initial Catalog=Buvette;Integrated Security=True" SettingsObjectName="Buvette.Properties.Settings" SettingsPropertyName="BuvetteConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Produit" Member="Produit">
+    <Type Name="Produit">
+      <Column Name="ref_produit" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nom" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Produit_Sous_Produit" Member="Sous_Produit" ThisKey="ref_produit" OtherKey="ref_produit" Type="Sous_Produit" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sous_Produit" Member="Sous_Produit">
+    <Type Name="Sous_Produit">
+      <Column Name="id_sous_produit" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nom" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="qte" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="prix_unitaire" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ref_produit" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="id_commande" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Produit_Sous_Produit" Member="Produit" ThisKey="ref_produit" OtherKey="ref_produit" Type="Produit" IsForeignKey="true" />
+      <Association Name="commande_Sous_Produit" Member="commande" ThisKey="id_commande" OtherKey="id_commande" Type="commande" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.commande" Member="commande">
+    <Type Name="commande">
+      <Column Name="id_commande" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="date_com" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="commande_Sous_Produit" Member="Sous_Produit" ThisKey="id_commande" OtherKey="id_commande" Type="Sous_Produit" />
+    </Type>
+  </Table>
+</Database>
